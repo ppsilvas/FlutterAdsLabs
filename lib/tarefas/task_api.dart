@@ -103,6 +103,23 @@ class TaskProvider extends ChangeNotifier {
     }
   }
 
+  Future<void> fetchResponsible(int respkId) async {
+    final url = 'http://localhost:3001/tarefa/?pessoaId=$respkId';
+    final response = await http.get(Uri.parse(url));
+    if (response.statusCode == 200) {
+      final data = json.decode(response.body);
+      if (data is Map<String, dynamic> && data.containsKey('tarefas')) {
+        final List<dynamic> taskData = data['tarefas'];
+        tasks = taskData.map((item) => Task.fromJson(item)).toList();
+      } else {
+        throw Exception('Unexpected JSON structure');
+      }
+      notifyListeners();
+    } else {
+      throw Exception('Failed to load tasks');
+    }
+  }
+
   Future<void> addTask(Task task) async {
     const url = 'http://localhost:3001/tarefa';
     final response = await http.post(

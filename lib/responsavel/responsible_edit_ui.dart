@@ -1,5 +1,3 @@
-//import 'dart:js';
-
 import 'package:adslabs/responsavel/responsible_api.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker_plus/flutter_datetime_picker_plus.dart';
@@ -22,10 +20,10 @@ class _EditResponsiblePageState extends State<EditResponsiblePage> {
   @override
   void initState() {
     super.initState();
-    loadTask();
+    loadResponsible();
   }
 
-  void loadTask() async {
+  void loadResponsible() async {
     final Responsible taskByPk =
         await Provider.of<ResponsibleProvider>(context, listen: false)
             .fetchByPk(widget.responsibleId);
