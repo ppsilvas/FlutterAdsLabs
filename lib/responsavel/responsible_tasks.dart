@@ -78,13 +78,17 @@ class _ResponsibleTaskListState extends State<ResponsibleTaskList> {
               itemCount: responsibleProvider.tasks.length,
               itemBuilder: (context, index) {
                 final task = responsibleProvider.tasks[index];
+                bool condition = false;
+                if (task.status == 'pendente') {
+                  condition = true;
+                }
                 return ListTile(
                   title: Text(
                     task.title,
-                    style: const TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                    ),
+                    style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: condition ? Colors.red : Colors.black),
                   ),
                   subtitle: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
